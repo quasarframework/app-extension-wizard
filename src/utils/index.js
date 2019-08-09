@@ -38,8 +38,10 @@ const getListing = async (type = 'all', search = '') => {
 const collections = {
   obytePure: [
     '@quasar/obyte',
+    '@quasar/icon-genie',
     '@quasar/testing',
-    '@quasar/icon-genie'
+    '@quasar/qenv',
+    'qautomate'
   ],
   protools: [
     '@quasar/icon-genie',
@@ -58,7 +60,7 @@ const collections = {
     '@quasar/qplaceholder',
     '@quasar/qribbon',
     '@quasar/qwindow',
-    '@quasar/qzoom',
+    '@quasar/qzoom'
   ],
   kitchensink: [
     '@quasar/icon-genie'
