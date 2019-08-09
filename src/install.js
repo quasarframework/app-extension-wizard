@@ -1,6 +1,6 @@
 const execa = require('execa')
-const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add'
-// const addOrInvoke = 'add'
+// const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add'
+const addOrInvoke = 'add'
 let list
 module.exports = async (api) => {
   if (api.prompts.collectionList) list = api.prompts.collectionList

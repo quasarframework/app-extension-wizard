@@ -16,9 +16,9 @@ module.exports = function () {
 https://github.com/quasarframework/app-extension-wizard
 
  ----------------------------   WIZARD!   -------------------------------
-|  This wizard will help you install collections of app extensions,      |
-|  discover all published app extensions, and help you keep your entire  | 
-|  quasar environment (including @quasar/app) up to date with stable.    |
+|  This Wizard AE will help you install collections of app extensions,   |
+|  discover all published app extensions, and keep your entire quasar    | 
+|  environment (including @quasar/app) tracking stable releases.         |
  ------------------------------------------------------------------------
 `)
   return [
@@ -74,7 +74,6 @@ https://github.com/quasarframework/app-extension-wizard
       name: 'collections',
       type: 'checkbox',
       when:  function (input) {
-        // console.log(input); process.exit(0)
         if (input.wizardType === 'collections') return true
       },
       message: 'Choose a Collection of App Extensions',
@@ -102,11 +101,9 @@ https://github.com/quasarframework/app-extension-wizard
       type: 'checkbox',
       pageSize: 20,
       when: function (input) {
-        // console.log(input); process.exit(0)
         if (input.collections) return true
       },
-      // this.,
-      message: 'Choose a Collection of App Extensions',
+      message: 'Confirm the Collection Components',
       choices (input) {
         return new Promise((resolve, reject) => {
           const result = catalog.collections[input.collections].map(res => {
@@ -124,7 +121,6 @@ https://github.com/quasarframework/app-extension-wizard
       type: 'checkbox',
       pageSize: 20,
       when:  function (input) {
-        // console.log(input); process.exit(0)
         if (input.wizardType === 'officialCatalog') return true
       },
       message: 'Choose from the following Official App Extensions',
@@ -143,7 +139,6 @@ https://github.com/quasarframework/app-extension-wizard
       type: 'checkbox',
       pageSize: 20,
       when:  function (input) {
-        // console.log(input); process.exit(0)
         if (input.wizardType === 'completeCatalog') return true
       },
       message: 'Choose from the following Official App Extensions',
@@ -161,7 +156,6 @@ https://github.com/quasarframework/app-extension-wizard
       name: 'searchTerm',
       type: 'input',
       when:  function (input) {
-        // console.log(input); process.exit(0)
         if (input.wizardType === 'search') return true
       },
       message: 'Enter search term >'
@@ -171,10 +165,9 @@ https://github.com/quasarframework/app-extension-wizard
       type: 'checkbox',
       pageSize: 20,
       when:  function (input) {
-        // console.log(input); process.exit(0)
         if (input.wizardType === 'search') return true
       },
-      message: 'Choose from the following Official App Extensions',
+      message: 'Choose from the following search results: ',
       choices (input) {
         return new Promise((resolve, reject) => {
           catalog.getListing('all', input.searchTerm).then(res => {
