@@ -1,4 +1,4 @@
-Official Quasar App Extension Title: @quasar/wizard
+@quasar/wizard
 ===
 > The Wizard helps you discover App Extensions, easily install collections of AE's and keep your Quasar environment up to date.
 
@@ -25,3 +25,7 @@ quasar ext remove @quasar/wizard
 
 # Donate
 If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
+
+# License
+(c) 2019 Daniel Thompson-Yvetot & Razvan Stoenescu
+MIT
