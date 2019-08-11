@@ -1,4 +1,6 @@
 const axios = require('axios')
+const semver = require('semver')
+const execa = require('execa')
 
 /**
  * @name getListing
@@ -35,37 +37,106 @@ const getListing = async (type = 'all', search = '') => {
   })
 }
 
-const collections = {
-  obytePure: [
-    '@quasar/obyte',
-    '@quasar/icon-genie',
-    '@quasar/testing',
-    '@quasar/qenv',
-    'qautomate'
-  ],
-  protools: [
-    '@quasar/icon-genie',
-    '@quasar/testing',
-    '@quasar/typescript',
-    '@quasar/qenv',
-    '@quasar/feathersjs',
-    'qautomate'
-  ],
-  adminGui: [
-    '@quasar/icon-genie',
-    '@quasar/qcalendar',
-    '@quasar/qmarkdown',
-    '@quasar/qmediaplayer',
-    '@quasar/qpdfviewer',
-    '@quasar/qplaceholder',
-    '@quasar/qribbon',
-    '@quasar/qwindow',
-    '@quasar/qzoom'
-  ],
-  kitchensink: [
-    '@quasar/icon-genie'
-  ]
+/**
+ * @name collections
+ * @description - Get the latest list of collections from the CDN
+ * @returns {Promise<Promise<AxiosResponse<any>>>}
+ */
+const collections = async () => {
+  const request = axios.get(`https://cdn.quasar.dev/lists/wizard/collections.json`)
+  return request.then((res) => {
+    return res.data
+  }).catch(err => console.log(err))
+}
+
+/**
+ * @name cliVersion
+ * @description - Guard to guarantee that the Quasar Cli
+ * is at least a specific version, if not - exit process.
+ * @param semverCondition
+ */
+const cliVersion = (semverCondition) => {
+  const v = process.env.QUASAR_CLI_VERSION
+  if (!semver.satisfies(v, semverCondition)) {
+    console.log(` @quasar/cli is out of date (installed: ${v}) 
+ In order to use the Wizard, please upgrade to at least: ${semverCondition}
+ 
+ $ npm i -g @quasar/cli
+ or
+ $ yarn global add @quasar/cli
+    `)
+    process.exit(1)
+  }
+}
+
+/**
+ *
+ * @param {object} cwd - cwd
+ * @param force
+ * @returns {Promise<void>}
+ */
+const upgrade = async (cwd, force = '') => {
+  const notifyUpgrade = execa(
+    'quasar', ['upgrade', force],
+    {
+      cwd: cwd
+    }
+  )
+  let { stdout } = await notifyUpgrade
+  return stdout
+}
+
+/**
+ *
+ * @param addOrInvoke
+ * @param ext
+ * @param cwd
+ * @returns {Promise<execa.ExecaChildProcess>}
+ */
+const install = async (addOrInvoke, ext, cwd) => {
+  return execa(
+    'quasar',
+    [
+      'ext',
+      'add', // addOrInvoke,
+      ext
+    ],
+    {
+      stdio: 'inherit',
+      cwd: cwd,
+      preferLocal: true
+    }
+  )
+}
+
+/**
+ * Create a spinner on the command line
+ *
+ * @example
+ *
+ *     const spinnerInterval = spinner()
+ *     // later
+ *     clearInterval(spinnerInterval)
+ * @returns {function} - the interval object
+ */
+const spinner = function () {
+  return setInterval(()=> {
+    process.stdout.write('/ \r')
+    setTimeout(()=>{
+      process.stdout.write('- \r')
+      setTimeout(()=>{
+        process.stdout.write('\\ \r')
+        setTimeout(()=>{
+          process.stdout.write('| \r')
+        }, 100)
+      }, 100)
+    }, 100)
+  },500)
 }
 
 exports.getListing = getListing
 exports.collections = collections
+exports.cliVersion = cliVersion
+exports.upgrade = upgrade
+exports.install = install
+exports.spinner = spinner
