@@ -22,3 +22,5 @@ yarn-error.log*
 # don't add these files for the test/app
 yarn.lock
 quasar.extensions.json
+
+.quasar.env.json
