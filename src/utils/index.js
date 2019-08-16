@@ -24,10 +24,10 @@ const getListing = async (type = 'all', search = '') => {
       if (item.package.name !== '@quasar/quasar-app-extension-wizard') {
         if (item.package.scope === 'quasar' && (type === 'official' || type === 'all')) {
           this.extId = item.package.name.replace('quasar-app-extension-', '')
-          this.results.push({name: `${this.extId} v${item.package.version} - ${item.package.description}`, value: this.extId})
+          this.results.push({name: ` ${this.extId} v${item.package.version} - ${item.package.description}`, value: this.extId})
         } else if (type === 'unofficial' || type === 'all') {
           this.extId = item.package.name.replace('quasar-app-extension-', '')
-          this.results.push({name: `${this.extId} v${item.package.version} - ${item.package.description}`, value: this.extId})
+          this.results.push({name: ` ${this.extId} v${item.package.version} - ${item.package.description}`, value: this.extId})
         }
       }
     })
