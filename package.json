@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-wizard",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "An App Extension that lets you install a collection of App Extensions and keep them Up to Date",
   "author": "Daniel Thompson-Yvetot <denjell@quasar.dev>",
   "license": "MIT",
