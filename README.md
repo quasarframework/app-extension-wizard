@@ -1,3 +1,6 @@
+# Attention!
+This project has been discontinued.
+
 @quasar/wizard
 ===
 ![official icon](https://img.shields.io/badge/Quasar%201.0-Official%20App%20Extension-blue.svg)
