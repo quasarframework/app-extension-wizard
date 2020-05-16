@@ -1,5 +1,5 @@
 # Attention!
-This project has been discontinued.
+**This project has been discontinued.**
 
 @quasar/wizard
 ===
